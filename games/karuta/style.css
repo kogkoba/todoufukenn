@@ -45,6 +45,26 @@ button {
 #cards img:hover {
     border-color: red;
 }
+#map-container {
+    width: 80%;
+    margin: 20px auto;
+    position: relative;
+    text-align: center;
+}
+#japan-map {
+    width: 100%;
+    max-width: 600px;
+}
+.prefecture-marker {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: red;
+    opacity: 0.8;
+    transform: translate(-50%, -50%);
+}
+
 .correct {
     border: 5px solid green;
     border-radius: 50%;
