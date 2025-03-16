@@ -1,1 +1,9 @@
-
+questions.json（例）
+```json
+[
+    {
+        "question": "日本一広い面積を持つ都道府県は？",
+        "answer": "hokkaido",
+        "choices": ["hokkaido", "tokyo", "osaka", "kyoto", "okinawa", "aomori"]
+    },
+    // 他の問題を追加
