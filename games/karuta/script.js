@@ -6,29 +6,34 @@ let questions = [];
 
 async function loadQuestions() {
     const res = await fetch('./data/questions.json');
-    return await res.json();
+    questions = await res.json();
 }
 
 function startGame() {
-    // タイマーセット
+    document.getElementById("start-button").style.display = "none";
+    document.getElementById("game-area").style.display = "block";
     timer = setInterval(() => {
         time--;
-        document.getElementById('time').innerText = `制限時間：${time}秒`;
-        if (time <= 0) clearInterval(timer);
+        document.getElementById('timer').innerText = time;
+        if (time <= 0) {
+            clearInterval(timer);
+            alert("ゲーム終了！");
+        }
     }, 1000);
-    
     nextQuestion();
 }
 
 async function nextQuestion() {
-    const data = await fetch('./data/questions.json').then(res => res.json());
-    const question = data[Math.floor(Math.random() * data.length)];
-
-    document.getElementById('question').innerText = question.text;
-
+    const question = questions[Math.floor(Math.random() * questions.length)];
+    document.getElementById('question').innerText = question.question;
+    
+    let choices = [...questions].sort(() => Math.random() - 0.5).slice(0, 5);
+    choices.push(question);
+    choices = choices.sort(() => Math.random() - 0.5);
+    
     let cardsHTML = '';
-    question.choices.forEach(pref => {
-        cardsHTML += `<img src="images/${pref}.png" onclick="checkAnswer('${pref}', '${question.answer}')">`;
+    choices.forEach(pref => {
+        cardsHTML += `<img src="assets/images/${pref.answer}" onclick="checkAnswer('${pref.answer}', '${question.answer}')">`;
     });
     document.getElementById('cards').innerHTML = cardsHTML;
 }
@@ -39,13 +44,12 @@ function checkAnswer(selected, answer) {
     } else {
         alert(`不正解！正解は${answer}です。`);
     }
-    document.getElementById('points').innerText = `獲得ポイント：${points}点`;
+    document.getElementById('points').innerText = points;
     nextQuestion();
 }
 
-function nextQuestion() {
-    // 次の問題の読み込みロジック
-}
-
-window.onload = startGame;
+document.getElementById("start-button").addEventListener("click", startGame);
+window.onload = loadQuestions;
 ```
+
+---
