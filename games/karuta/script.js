@@ -4,9 +4,16 @@ let timer;
 let questions = [];
 
 async function loadQuestions() {
-    const res = await fetch('./data/questions.json');
-    questions = await res.json();
+    try {
+        const res = await fetch('./data/questions.json'); // ✅ 修正済み
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        questions = await res.json();
+        console.log("問題データをロードしました:", questions);
+    } catch (error) {
+        console.error("問題データの読み込みに失敗しました:", error);
+    }
 }
+
 
 function startGame() {
     document.getElementById("start-button").style.display = "none";
