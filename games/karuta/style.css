@@ -1,1 +1,26 @@
+```css
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+button {
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+}
+#game-area {
+    margin-top: 20px;
+}
+#cards img {
+    width: 150px;
+    height: 100px;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid black;
+}
+#cards img:hover {
+    border-color: red;
+}
+```
 
+---
