@@ -4,7 +4,7 @@ let timer;
 let questions = [];
 
 async function loadQuestions() {
-    const res = await fetch('questions.json');
+    const res = await fetch('date/questions.json');
     questions = await res.json();
 }
 
