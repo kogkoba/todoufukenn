@@ -1,8 +1,8 @@
-let time = 60;
+let time = 60;  // ← これを残す
 let points = 0;
 let timer;
 let questions = [];
-let scrollCount = 0; // ✅ 追加（回数をカウント）
+
 
 async function loadQuestions() {
     try {
