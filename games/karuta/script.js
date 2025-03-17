@@ -102,3 +102,4 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("start-button").addEventListener("click", startGame);
     loadQuestions();
 });
+
