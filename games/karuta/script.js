@@ -37,8 +37,22 @@ function nextQuestion() {
     const questionElement = document.getElementById('question');
     questionElement.innerText = questionData.question;
     questionElement.style.animation = 'none';
-
-
+    let scrollCount = 0;
+setTimeout(() => {
+    if (scrollCount < 2) {
+        questionElement.style.animation = 'scrollText 10s linear 3';
+    } else {
+        questionElement.style.animation = 'none';
+        questionElement.style.position = 'absolute';
+        questionElement.style.top = '50%';
+        questionElement.style.left = '50%';
+        questionElement.style.transform = 'translate(-50%, -50%)';
+        questionElement.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        questionElement.style.padding = '10px';
+        questionElement.style.borderRadius = '10px';
+    }
+    scrollCount++;
+}, 500);
     setTimeout(() => {
         questionElement.style.animation = 'scrollText 10s linear 3';
     }, 500);
@@ -70,4 +84,3 @@ function checkAnswer(selected, answer) {
 
 document.getElementById("start-button").addEventListener("click", startGame);
 window.onload = loadQuestions;
-
