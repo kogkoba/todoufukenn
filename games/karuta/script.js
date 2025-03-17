@@ -38,6 +38,9 @@ function nextQuestion() {
     questionElement.innerText = questionData.question;
     questionElement.style.animation = 'none';
     setTimeout(() => {
+        questionElement.style.animation = 'scrollText 10s linear 3';
+    }, 100);
+    setTimeout(() => {
         questionElement.style.animation = 'scrollText 10s linear 3'; // ✅ 速度を遅くする
     }, 100);
     
