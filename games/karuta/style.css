@@ -29,7 +29,7 @@ body {
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    max-width: 400px; /* ✅ 画像の表示領域を制限 */
+    max-width: 600px; /* ✅ 画像の表示領域を制限 */
     margin-left: auto;
     margin-right: auto;
 }
