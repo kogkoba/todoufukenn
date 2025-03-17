@@ -42,4 +42,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow:
+    overflow: hidden;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
