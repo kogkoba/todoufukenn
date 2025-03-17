@@ -2,7 +2,6 @@ let time = 60;
 let points = 0;
 let timer;
 let questions = [];
-let scrollCount = 0; // ✅追加 (回数をカウント)
 
 async function loadQuestions() {
     try {
@@ -38,12 +37,10 @@ function nextQuestion() {
     questionElement.innerText = questionData.question;
     questionElement.style.animation = 'none';
     questionElement.style.position = '';
-    questionElement.style.top = '';
-    questionElement.style.left = '';
-    questionElement.style.transform = '';
     questionElement.style.backgroundColor = '';
     questionElement.style.padding = '';
     questionElement.style.borderRadius = '';
+    questionElement.style.transform = '';
 
     let animationCount = 0;
 
@@ -52,20 +49,23 @@ function nextQuestion() {
             questionElement.style.animation = 'scrollText 10s linear';
         } else {
             questionElement.style.animation = 'none';
-            questionElement.style.position = 'absolute';
-            questionElement.style.top = '10px';
-            questionElement.style.left = '50%';
-            questionElement.style.transform = 'translateX(-50%)';
+            questionElement.style.position = 'relative';
+            questionElement.style.top = '0';
+            questionElement.style.left = '0';
+            questionElement.style.transform = 'none';
             questionElement.style.backgroundColor = 'rgba(255,255,255,0.9)';
             questionElement.style.padding = '5px 10px';
             questionElement.style.borderRadius = '5px';
+            questionElement.innerText = questionData.question;
             showCards(true);
             return;
         }
-        animationCount++;
+
         questionElement.addEventListener('animationend', animateQuestion, { once: true });
+        animationCount++;
     }
 
+    let animationCount = 0;
     animateQuestion();
     showCards(false);
 
@@ -76,10 +76,11 @@ function nextQuestion() {
 
         let cardsHTML = '<div class="grid-container">';
         choices.forEach((pref) => {
-            cardsHTML += `<div class="grid-item">
-                            ${showLabels ? `<div class="label">${pref.question}</div>` : ''}
-                            <img src="./images/${pref.answer}" onclick="checkAnswer('${pref.answer}', '${questionData.answer}')">
-                          </div>`;
+            cardsHTML += `
+            <div class="grid-item">
+                ${showLabels ? `<div>${pref.name}</div>` : ''}
+                <img src="./images/${pref.answer}" onclick="checkAnswer('${pref.answer}', '${questionData.answer}')">
+            </div>`;
         });
         cardsHTML += '</div>';
         document.getElementById('cards').innerHTML = cardsHTML;
@@ -93,8 +94,11 @@ function checkAnswer(selected, answer) {
         alert(`不正解！正解は${answer}です。`);
     }
     document.getElementById('points').innerText = points;
-    nextQuestion(); // ✅修正
+    nextQuestion();
 }
 
-document.getElementById("start-button").addEventListener("click", startGame);
-window.onload = loadQuestions;
+// ✅必ずDOM読み込み後に実行
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("start-button").addEventListener("click", startGame);
+    loadQuestions();
+});
