@@ -4,7 +4,7 @@ document.head.insertAdjacentHTML("beforeend", `
     .grid-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
-        grid-template-rows: repeat(2, auto);
+        grid-template-rows: repeat(2, 1fr);
         gap: 5px; /* ✅ 画像間の隙間をさらに狭める */
         justify-content: center;
         align-items: center;
@@ -28,4 +28,3 @@ document.head.insertAdjacentHTML("beforeend", `
     }
 </style>
 `);
-
