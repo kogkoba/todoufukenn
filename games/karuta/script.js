@@ -5,7 +5,7 @@ let questions = [];
 
 async function loadQuestions() {
     try {
-        const res = await fetch('./data/questions.json'); // ✅ 正しいパス
+        const res = await fetch('./data/questions.json');
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         questions = await res.json();
         console.log("問題データをロードしました:", questions);
@@ -36,17 +36,11 @@ function nextQuestion() {
     const questionData = questions[Math.floor(Math.random() * questions.length)];
     const questionElement = document.getElementById('question');
     questionElement.innerText = questionData.question;
-    questionElement.style.animation = 'none';
+    questionElement.style.animation = "none";
     setTimeout(() => {
-        questionElement.style.animation = 'scrollText 10s linear 3';
-    }, 500);
-    setTimeout(() => {
-        questionElement.style.animation = 'scrollText 10s linear 3';
-    }, 500);
-    setTimeout(() => {
-        questionElement.style.animation = 'scrollText 10s linear 3'; // ✅ 速度を遅くする
+        questionElement.style.animation = "scrollText 10s linear infinite";
     }, 100);
-    
+
     let choices = [...questions].sort(() => Math.random() - 0.5).slice(0, 5);
     choices.push(questionData);
     choices = choices.sort(() => Math.random() - 0.5);
