@@ -99,3 +99,4 @@ function checkAnswer(selected, answer) {
     }
     document.getElementById('points').innerText = points;
     nextQu
+    } 
