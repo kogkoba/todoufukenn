@@ -43,16 +43,24 @@ function nextQuestion() {
     currentQuestionIndex++; // 次の問題へ
 
     const questionElement = document.getElementById('question');
-    questionElement.innerText = questionData.question;
-    questionElement.style.animation = 'none';
-    questionElement.style.position = '';
-    questionElement.style.top = '';
-    questionElement.style.left = '';
-    questionElement.style.transform = '';
-    questionElement.style.backgroundColor = '';
-    questionElement.style.padding = '';
-    questionElement.style.borderRadius = '';
+    
+    // ✅ 変更1: 正解時に問題文をいったん消す
+    questionElement.innerText = "";
+    
+    // ✅ 変更2: 右から左へ流れるアニメーションを追加
+    setTimeout(() => {
+        questionElement.innerText = questionData.question;
+        questionElement.style.animation = 'none';
+        questionElement.style.position = 'absolute';
+        questionElement.style.right = '100%'; // 画面外に配置
+        questionElement.style.left = 'auto';  
+        questionElement.style.transform = 'translateX(0%)';
 
+        setTimeout(() => {
+            questionElement.style.animation = 'scrollText 10s linear';
+        }, 100); // 少し遅れてアニメーション開始
+    }, 500); // 問題文を一瞬消す時間
+    
     animationCount = 0;
 
     function animateQuestion() {
@@ -81,10 +89,20 @@ function nextQuestion() {
     showCards(false);
 }
 
+// ✅ 変更3: 選択肢6つが絶対に被らないように修正
 function showCards(showLabels = false) {
-    let choices = [...questions].sort(() => Math.random() - 0.5).slice(0, 5);
-    choices.push(questions[currentQuestionIndex - 1]);
-    choices = choices.sort(() => Math.random() - 0.5);
+    let choices = [];
+    let availableQuestions = questions.filter(q => q.answer !== questions[currentQuestionIndex - 1].answer);
+    
+    // 正解を含めた6つの選択肢をランダムで取得（被らないようにする）
+    while (choices.length < 5) {
+        let randomIndex = Math.floor(Math.random() * availableQuestions.length);
+        let randomChoice = availableQuestions.splice(randomIndex, 1)[0];
+        choices.push(randomChoice);
+    }
+    
+    choices.push(questions[currentQuestionIndex - 1]); // 正解を追加
+    choices = choices.sort(() => Math.random() - 0.5); // 配置をランダム化
 
     let cardsHTML = '<div class="grid-container">';
     choices.forEach((pref) => {
@@ -97,11 +115,18 @@ function showCards(showLabels = false) {
     document.getElementById('cards').innerHTML = cardsHTML;
 }
 
+// ✅ 変更4: 正解が押されたら、次の問題を流す
 function checkAnswer(selected, answer) {
     if (selected === answer) {
         points += 10;
         document.getElementById('points').innerText = points;
-        nextQuestion(); // ✅ 正解なら次の問題へ即移動
+        
+        // ✅ 変更: 問題文を消して、すぐに次の問題を流す
+        document.getElementById('question').innerText = "";
+
+        setTimeout(() => {
+            nextQuestion();
+        }, 500); // 一瞬消した後、次の問題を流す
     } else {
         alert(`不正解！正解は${answer}です。`);
     }
