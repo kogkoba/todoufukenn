@@ -1,47 +1,30 @@
-body {
-    text-align: center;
-    font-family: Arial, sans-serif;
-}
-
-#question-container {
-    height: 100px;
-    overflow: hidden;
-    font-size: 2rem;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-#question {
-    display: inline-block;
-    animation: scrollText 10s linear infinite;
-}
-
-@keyframes scrollText {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 5px;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    max-width: 600px; /* ✅ 画像の表示領域を制限 */
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.grid-item img {
-    width: 100%;
-    max-width: 100px; /* ✅ 画像のサイズを一定にする */
-    height: auto;
-}
-
-.grid-item img {
-    width: 100%;
-    max-width: 120px;
-    height: auto;
-}
+// ✅ CSS でグリッド配置と問題文のスタイルを調整
+document.head.insertAdjacentHTML("beforeend", `
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 5px; /* ✅ 画像間の隙間をさらに狭める */
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px; /* ✅ 画像の位置を少し上げる */
+    }
+    .grid-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .grid-item img {
+        width: 100%;
+        max-width: 130px; /* ✅ 画像のサイズを少し調整 */
+        height: auto;
+    }
+    #question {
+        font-size: 2.5rem; /* ✅ さらに見やすく大きく */
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 40px; /* ✅ 画像との間隔を微調整 */
+    }
+</style>
+`);
