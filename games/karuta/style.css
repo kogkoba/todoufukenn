@@ -4,7 +4,7 @@ body {
 }
 
 #question-container {
-    height: 60px;
+    height: 100px;
     overflow: hidden;
     font-size: 2rem;
     font-weight: bold;
