@@ -65,34 +65,3 @@ function checkAnswer(selected, answer) {
 
 document.getElementById("start-button").addEventListener("click", startGame);
 window.onload = loadQuestions;
-
-// ✅ CSS でグリッド配置と問題文のスタイルを調整
-document.head.insertAdjacentHTML("beforeend", `
-<style>
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: repeat(2, auto);
-        gap: 10px; /* ✅ 画像間の隙間を適切に設定 */
-        justify-content: center;
-        align-items: center;
-        margin-top: 50px; /* ✅ 画像の位置を下げてテキストと重ならないように */
-    }
-    .grid-item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .grid-item img {
-        width: 100%;
-        max-width: 140px;
-        height: auto;
-    }
-    #question {
-        font-size: 2.5rem; /* ✅ さらに見やすく大きく */
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 50px; /* ✅ 画像と適切な距離を確保 */
-    }
-</style>
-`);
