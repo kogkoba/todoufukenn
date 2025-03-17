@@ -73,10 +73,10 @@ document.head.insertAdjacentHTML("beforeend", `
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, auto);
-        gap: 5px; /* ✅ 空白を少なく */
+        gap: 10px; /* ✅ 画像間の隙間を適切に設定 */
         justify-content: center;
         align-items: center;
-        margin-top: 20px; /* ✅ 画像の位置を調整 */
+        margin-top: 50px; /* ✅ 画像の位置を下げてテキストと重ならないように */
     }
     .grid-item {
         display: flex;
@@ -85,14 +85,14 @@ document.head.insertAdjacentHTML("beforeend", `
     }
     .grid-item img {
         width: 100%;
-        max-width: 120px;
+        max-width: 140px;
         height: auto;
     }
     #question {
-        font-size: 2.2rem; /* ✅ さらに大きく */
+        font-size: 2.5rem; /* ✅ さらに見やすく大きく */
         font-weight: bold;
         text-align: center;
-        margin: 30px 0; /* ✅ 画像と適切な距離 */
+        margin-bottom: 50px; /* ✅ 画像と適切な距離を確保 */
     }
 </style>
 `);
