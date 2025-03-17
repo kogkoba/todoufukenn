@@ -3,22 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>都道府県かるた</title>
+    <title>ゲーム選択ページ</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>都道府県かるた</h1>
-    <p>制限時間：<span id="timer">60</span>秒</p>
-    <p>獲得ポイント：<span id="points">0</span>点</p>
-    <button id="start-button">スタート</button>
-    
-    <div id="game-area" style="display:none;">
-        <div id="question-container">
-            <p id="question">ここに問題文が流れます</p>
-        </div>
-        <div id="cards"></div>
+    <h1>ゲームを選ぶ</h1>
+    <div class="game-selection">
+        <button onclick="location.href='karuta/index.html'">都道府県かるた</button>
+        <!-- 今後ゲームを追加する場合はここに追加 -->
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
