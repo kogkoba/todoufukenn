@@ -66,20 +66,33 @@ function checkAnswer(selected, answer) {
 document.getElementById("start-button").addEventListener("click", startGame);
 window.onload = loadQuestions;
 
-// ✅ CSS でグリッド配置を固定するためのスタイルを追加
+// ✅ CSS でグリッド配置と問題文のスタイルを調整
 document.head.insertAdjacentHTML("beforeend", `
 <style>
     .grid-container {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, auto);
-        gap: 10px;
+        gap: 5px; /* ✅ 空白を少なく */
         justify-content: center;
+        align-items: center;
+        margin-top: 20px; /* ✅ 画像の位置を調整 */
+    }
+    .grid-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .grid-item img {
         width: 100%;
-        max-width: 150px;
+        max-width: 120px;
         height: auto;
+    }
+    #question {
+        font-size: 2.2rem; /* ✅ さらに大きく */
+        font-weight: bold;
+        text-align: center;
+        margin: 30px 0; /* ✅ 画像と適切な距離 */
     }
 </style>
 `);
