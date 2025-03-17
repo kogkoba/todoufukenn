@@ -46,9 +46,8 @@ function nextQuestion() {
     choices = choices.sort(() => Math.random() - 0.5);
 
     let cardsHTML = '<div class="grid-container">';
-    choices.forEach((pref, index) => {
+    choices.forEach((pref) => {
         cardsHTML += `<div class="grid-item"><img src="./images/${pref.answer}" onclick="checkAnswer('${pref.answer}', '${questionData.answer}')"></div>`;
-        if ((index + 1) % 3 === 0) cardsHTML += '<br>'; // 3列で改行
     });
     cardsHTML += '</div>';
     document.getElementById('cards').innerHTML = cardsHTML;
@@ -66,3 +65,21 @@ function checkAnswer(selected, answer) {
 
 document.getElementById("start-button").addEventListener("click", startGame);
 window.onload = loadQuestions;
+
+// ✅ CSS でグリッド配置を固定するためのスタイルを追加
+document.head.insertAdjacentHTML("beforeend", `
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, auto);
+        gap: 10px;
+        justify-content: center;
+    }
+    .grid-item img {
+        width: 100%;
+        max-width: 150px;
+        height: auto;
+    }
+</style>
+`);
