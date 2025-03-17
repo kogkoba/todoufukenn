@@ -71,33 +71,3 @@ function checkAnswer(selected, answer) {
 document.getElementById("start-button").addEventListener("click", startGame);
 window.onload = loadQuestions;
 
-// ✅ CSS でグリッド配置と問題文のスタイルを調整
-document.head.insertAdjacentHTML("beforeend", `
-<style>
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 5px; /* ✅ 画像間の隙間をさらに狭める */
-        justify-content: center;
-        align-items: center;
-        margin-top: 40px; /* ✅ 画像の位置を少し上げる */
-    }
-    .grid-item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .grid-item img {
-        width: 100%;
-        max-width: 130px; /* ✅ 画像のサイズを少し調整 */
-        height: auto;
-    }
-    #question {
-        font-size: 2.5rem; /* ✅ さらに見やすく大きく */
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 40px; /* ✅ 画像との間隔を微調整 */
-    }
-</style>
-`);
