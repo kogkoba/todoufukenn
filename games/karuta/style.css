@@ -19,10 +19,9 @@ body {
 }
 
 @keyframes scrollText {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(-100%); }
+    0%   { transform: translateX(10%); } /* ← 10%の位置からスタート */
+    100% { transform: translateX(-100%); } /* 左端へ移動 */
 }
-
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
