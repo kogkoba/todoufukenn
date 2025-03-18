@@ -15,12 +15,18 @@ body {
 
 #question {
     display: inline-block;
-    position: relative;
+    position: absolute;
+    top: 120px; /* 💡 新潟の上に表示 */
+    left: 50vw; /* 💡 初期位置 */
+    white-space: nowrap;
+    animation: scrollText 10s linear 3; /* 💡 3回流れるように設定 */
 }
 
+
+
 @keyframes scrollText {
-    0%   { transform: translateX(10%); } /* ← 10%の位置からスタート */
-    100% { transform: translateX(-100%); } /* 左端へ移動 */
+    0%   { transform: translateX(50vw); }  /* 💡 スタート位置 */
+    100% { transform: translateX(-100%); } /* 💡 左端へ */
 }
 .grid-container {
     display: grid;
