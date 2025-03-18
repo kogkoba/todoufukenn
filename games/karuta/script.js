@@ -2,7 +2,7 @@ let time = 60;
 let points = 0;
 let timer;
 let questions = [];
-let scrollCount = 0;  // 問題が何回流れたかカウント
+let scrollCount = 0; // 問題が何回流れたかカウント
 
 async function loadQuestions() {
     try {
@@ -18,7 +18,7 @@ async function loadQuestions() {
 function startGame() {
     document.getElementById("start-button").style.display = "none";
     document.getElementById("game-area").style.display = "block";
-    
+
     timer = setInterval(() => {
         time--;
         document.getElementById('timer').innerText = time;
@@ -34,18 +34,18 @@ function startGame() {
 function nextQuestion() {
     if (time <= 0) return;
 
-    scrollCount = 0; // カウントをリセット
+    scrollCount = 0;
     const questionData = questions[Math.floor(Math.random() * questions.length)];
     const questionElement = document.getElementById('question');
-    
+
     questionElement.innerText = questionData.question;
-    questionElement.style.animation = 'none'; // アニメーションをリセット
-    questionElement.style.left = '100vw';  // 💡 画面の外からスタート
-    questionElement.style.display = 'block'; // 💡 最初に非表示にならないようにする
+    questionElement.style.animation = 'none';
+    questionElement.style.left = '100vw';
+    questionElement.style.display = 'block';
 
     setTimeout(() => {
         scrollTextAnimation(questionElement, questionData);
-    }, 100);  // 💡 遅延をほぼなくす
+    }, 100);
 }
 
 function scrollTextAnimation(element, questionData) {
@@ -57,7 +57,6 @@ function scrollTextAnimation(element, questionData) {
             scrollTextAnimation(element, questionData);
         }, { once: true });
     } else {
-        // 3回目は中央に固定
         element.style.animation = 'none';
         element.style.left = '50%';
         element.style.transform = 'translateX(-50%)';
@@ -69,10 +68,17 @@ function scrollTextAnimation(element, questionData) {
 }
 
 function showCards(showLabels, questionData) {
-    let choices = questions.filter(q => q.answer !== questionData.answer);
-    choices = choices.sort(() => Math.random() - 0.5).slice(0, 5);
-    choices.push(questionData);
-    choices = choices.sort(() => Math.random() - 0.5); // 正解を混ぜる
+    let choicesSet = new Set();
+    choicesSet.add(questionData.answer);
+
+    while (choicesSet.size < 6) {
+        let randomChoice = questions[Math.floor(Math.random() * questions.length)].answer;
+        choicesSet.add(randomChoice);
+    }
+
+    let choices = Array.from(choicesSet).map(answer => {
+        return questions.find(q => q.answer === answer);
+    });
 
     let cardsHTML = '<div class="grid-container">';
     choices.forEach((pref) => {
@@ -89,8 +95,8 @@ function checkAnswer(selected, answer) {
     if (selected === answer) {
         points += 10;
         document.getElementById('points').innerText = points;
-        document.getElementById('question').style.animation = 'none'; // アニメーション停止
-        setTimeout(nextQuestion, 500);  // 次の問題へ
+        document.getElementById('question').style.display = 'none';
+        setTimeout(nextQuestion, 500);
     }
 }
 
