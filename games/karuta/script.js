@@ -80,16 +80,19 @@ function showCards(showLabels, questionData) {
         return questions.find(q => q.answer === answer);
     });
 
+    choices.sort(() => Math.random() - 0.5); // ランダム配置
+
     let cardsHTML = '<div class="grid-container">';
     choices.forEach((pref) => {
         cardsHTML += `<div class="grid-item">
                         ${showLabels ? `<div class="pref-label">${pref.name}</div>` : ''}
-                        <img src="/games/karuta/images/${pref.answer}" onclick="checkAnswer('${pref.answer}', '${questionData.answer}')">
+                        <img src="./images/${pref.answer}" onclick="checkAnswer('${pref.answer}', '${questionData.answer}')">
                       </div>`;
     });
     cardsHTML += '</div>';
     document.getElementById('cards').innerHTML = cardsHTML;
 }
+
 
 function checkAnswer(selected, answer) {
     if (selected === answer) {
