@@ -2,11 +2,12 @@ let time = 60;
 let points = 0;
 let timer;
 let questions = [];
-let scrollCount = 0; // 問題が何回流れたかカウント
+let scrollCount = 0; // 問題の流れる回数をカウント
 
+// JSONデータを読み込む
 async function loadQuestions() {
     try {
-        const res = await fetch('./data/questions.json');
+        const res = await fetch('./data/questions.json'); // ✅ パス修正
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         questions = await res.json();
         console.log("問題データをロードしました:", questions);
@@ -15,6 +16,7 @@ async function loadQuestions() {
     }
 }
 
+// ゲーム開始
 function startGame() {
     document.getElementById("start-button").style.display = "none";
     document.getElementById("game-area").style.display = "block";
@@ -31,16 +33,17 @@ function startGame() {
     nextQuestion();
 }
 
+// 問題の表示処理
 function nextQuestion() {
     if (time <= 0) return;
 
-    scrollCount = 0;
+    scrollCount = 0; // カウントリセット
     const questionData = questions[Math.floor(Math.random() * questions.length)];
     const questionElement = document.getElementById('question');
 
     questionElement.innerText = questionData.question;
     questionElement.style.animation = 'none';
-    questionElement.style.left = '100vw';
+    questionElement.style.left = '100vw';  // 画面外からスタート
     questionElement.style.display = 'block';
 
     setTimeout(() => {
@@ -48,6 +51,7 @@ function nextQuestion() {
     }, 100);
 }
 
+// 文字の流れるアニメーション
 function scrollTextAnimation(element, questionData) {
     scrollCount++;
 
@@ -67,6 +71,7 @@ function scrollTextAnimation(element, questionData) {
     }
 }
 
+// 都道府県カードの表示
 function showCards(showLabels, questionData) {
     let choicesSet = new Set();
     choicesSet.add(questionData.answer);
@@ -80,8 +85,6 @@ function showCards(showLabels, questionData) {
         return questions.find(q => q.answer === answer);
     });
 
-    choices.sort(() => Math.random() - 0.5); // ランダム配置
-
     let cardsHTML = '<div class="grid-container">';
     choices.forEach((pref) => {
         cardsHTML += `<div class="grid-item">
@@ -93,12 +96,12 @@ function showCards(showLabels, questionData) {
     document.getElementById('cards').innerHTML = cardsHTML;
 }
 
-
+// 回答チェック
 function checkAnswer(selected, answer) {
     if (selected === answer) {
         points += 10;
         document.getElementById('points').innerText = points;
-        document.getElementById('question').style.display = 'none';
+        document.getElementById('question').style.animation = 'none';
         setTimeout(nextQuestion, 500);
     }
 }
