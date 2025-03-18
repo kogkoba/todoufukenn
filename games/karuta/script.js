@@ -78,7 +78,7 @@ function showCards(showLabels, questionData) {
     choices.forEach((pref) => {
         cardsHTML += `<div class="grid-item">
                         ${showLabels ? `<div class="pref-label">${pref.name}</div>` : ''}
-                        <img src="./images/${pref.answer}" onclick="checkAnswer('${pref.answer}', '${questionData.answer}')">
+                        <img src="/games/karuta/images/${pref.answer}" onclick="checkAnswer('${pref.answer}', '${questionData.answer}')">
                       </div>`;
     });
     cardsHTML += '</div>';
