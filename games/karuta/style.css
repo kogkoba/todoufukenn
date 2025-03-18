@@ -16,15 +16,14 @@ body {
 #question {
     display: inline-block;
     position: absolute;
-    top: 100px; /* 新潟の上に表示 */
-    left: 100vw; /* 初期位置を画面の右端に */
+    top: 100px; /* 💡 新潟の上に表示 */
+    left: 100vw; /* 💡 画面外からスタート */
     white-space: nowrap;
-    animation: scrollText 10s linear infinite; /* 3回繰り返し */
 }
 
 @keyframes scrollText {
-    0%   { transform: translateX(100vw); }
-    100% { transform: translateX(-100%); }
+    0%   { transform: translateX(100vw); }  /* 💡 画面右端からスタート */
+    100% { transform: translateX(-100%); } /* 💡 左端へ移動 */
 }
 
 .grid-container {
@@ -47,7 +46,7 @@ body {
 .grid-item img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: contain; /* 💡 枠内に画像を収める */
 }
 
 .pref-label {
