@@ -1,19 +1,21 @@
-都道府県かるた_Github
+main/
+│── css/
+│   └── common.css
 │
-├─ index.html （トップページ）
-├─ games
-│　 ├─ index.html（ゲーム一覧ページ）
-│　 └─ karuta
-│　　　├─ index.html（都道府県かるた）
-│　　　├─ script.js（ゲーム処理用JavaScript）
-│　　　├─ style.css（都道府県かるた用スタイル）
-│　　　├─ images（都道府県の画像）
-│　　　│　 ├─ hokkaido.png
-│　　　│　 ├─ tokyo.png
-│　　　│　 └─ ...（他の都道府県の画像）
-│　　　└─ data
-│　　　　　└─ questions.json（問題文と正解データ）
-├─ js
-│　 └─ common.js（共通で使うスクリプト）
-└─ css
-　　　└─ common.css（共通で使うスタイル）
+│── games/
+│   └── karuta/
+│       ├── assets/map/
+│       ├── data/
+│       │   └── questions.json  ← 問題データ（JSON）
+│       ├── images/  ← 都道府県の画像データ
+│       │   ├── 1_hokkaidou.png
+│       │   ├── 2_touhoku1__aomori.png
+│       │   ├── ...
+│       ├── index.html  ← メインのHTML
+│       ├── script.js  ← ゲームのロジック
+│       ├── style.css  ← スタイル
+│
+│── js/
+│   └── common.js
+│
+│── index.html
