@@ -1,61 +1,64 @@
 body {
-    text-align: center;
-    font-family: Arial, sans-serif;
+  text-align: center;
+  font-family: Arial, sans-serif;
 }
 
 #question-container {
-    height: 80px;
-    overflow: hidden;
-    position: relative;
-    font-size: 2rem;
-    font-weight: bold;
-    white-space: nowrap;
-    margin-bottom: 20px;
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+  font-size: 2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  margin-bottom: 20px;
 }
 
 #question {
-    display: inline-block;
-    position: absolute;
-    top: 100px; /* 💡 新潟の上に表示 */
-    left: 100vw; /* 💡 画面外からスタート */
-    white-space: nowrap;
+  display: inline-block;
+  position: absolute;
+  top: 100px;       /* 新潟の上あたりに調整（必要に応じて変更） */
+  left: 100vw;      /* 画面の右端からスタート */
+  white-space: nowrap;
 }
 
+/* アニメーション設定：右端から左端へ流れる */
 @keyframes scrollText {
-    0%   { transform: translateX(100vw); }  /* 💡 画面右端からスタート */
-    100% { transform: translateX(-100%); } /* 💡 左端へ移動 */
+  0%   { transform: translateX(100vw); }
+  100% { transform: translateX(-100vw); }
 }
 
+/* グリッドレイアウト（画像表示用） */
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-    justify-content: center;
-    max-width: 400px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  justify-content: center;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .grid-item {
-    width: 120px;
-    height: 120px;
-    border: 2px solid #333;
-    position: relative;
-    overflow: hidden;
+  width: 120px;
+  height: 120px;
+  border: 2px solid #333;
+  position: relative;
+  overflow: hidden;
 }
 
 .grid-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* 💡 枠内に画像を収める */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
+/* 都道府県名のラベル（3回目流れた後に表示する） */
 .pref-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 2px;
-    font-size: 0.8rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 2px;
+  font-size: 0.8rem;
 }
