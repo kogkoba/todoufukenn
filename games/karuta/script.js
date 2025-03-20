@@ -6,7 +6,7 @@ let scrollCount = 0; // 問題が何回流れたかカウント
 
 async function loadQuestions() {
     try {
-        const res = await fetch('../data/questions.json'); // 🔄 パス修正
+        const res = await fetch('/todoufukenn/games/karuta/data/questions.json'); // ✅ 修正
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         questions = await res.json();
         console.log("✅ 問題データをロードしました:", questions);
@@ -14,6 +14,7 @@ async function loadQuestions() {
         console.error("❌ 問題データの読み込みに失敗しました:", error);
     }
 }
+
 
 function startGame() {
     document.getElementById("start-button").style.display = "none";
