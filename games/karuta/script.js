@@ -83,17 +83,20 @@ function showCards(showLabels, questionData) {
 
     let cardsHTML = '<div class="grid-container">';
     choices.forEach((pref) => {
-        let imgPath = `../images/${pref.answer}`;  // 画像のパス修正
-        console.log(`🖼 画像のパス: ${imgPath}`); // デバッグログ
+        let imgPath = `/todoufukenn/games/karuta/images/${pref.answer}`;  // ✅ 絶対パスに変更
+        console.log(`🖼 画像のパス: ${imgPath}`); // ✅ コンソールに出力
 
         cardsHTML += `<div class="grid-item">
                         ${showLabels ? `<div class="pref-label">${pref.name}</div>` : ''}
-                        <img src="${imgPath}" onclick="checkAnswer('${pref.answer}', '${questionData.answer}')">
+                        <img src="${imgPath}" 
+                             onerror="this.onerror=null; console.error('❌ 画像が見つかりません:', this.src);" 
+                             onclick="checkAnswer('${pref.answer}', '${questionData.answer}')">
                       </div>`;
     });
     cardsHTML += '</div>';
     document.getElementById('cards').innerHTML = cardsHTML;
 }
+
 
 function checkAnswer(selected, answer) {
     if (selected === answer) {
