@@ -2,21 +2,19 @@ let time = 60;
 let points = 0;
 let timer;
 let questions = [];
-let scrollCount = 0; // 問題の流れる回数をカウント
+let scrollCount = 0; // 問題が何回流れたかカウント
 
-// JSONデータを読み込む
 async function loadQuestions() {
     try {
-        const res = await fetch('./data/questions.json'); // ✅ パス修正
+        const res = await fetch('../data/questions.json'); // 🔄 パス修正
         if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
         questions = await res.json();
-        console.log("問題データをロードしました:", questions);
+        console.log("✅ 問題データをロードしました:", questions);
     } catch (error) {
-        console.error("問題データの読み込みに失敗しました:", error);
+        console.error("❌ 問題データの読み込みに失敗しました:", error);
     }
 }
 
-// ゲーム開始
 function startGame() {
     document.getElementById("start-button").style.display = "none";
     document.getElementById("game-area").style.display = "block";
@@ -33,25 +31,23 @@ function startGame() {
     nextQuestion();
 }
 
-// 問題の表示処理
 function nextQuestion() {
     if (time <= 0) return;
 
-    scrollCount = 0; // カウントリセット
+    scrollCount = 0; // カウントをリセット
     const questionData = questions[Math.floor(Math.random() * questions.length)];
     const questionElement = document.getElementById('question');
 
     questionElement.innerText = questionData.question;
-    questionElement.style.animation = 'none';
-    questionElement.style.left = '100vw';  // 画面外からスタート
-    questionElement.style.display = 'block';
+    questionElement.style.animation = 'none'; // アニメーションリセット
+    questionElement.style.left = '100vw'; // 💡 画面の外からスタート
+    questionElement.style.display = 'block'; // 💡 表示
 
     setTimeout(() => {
         scrollTextAnimation(questionElement, questionData);
-    }, 100);
+    }, 100); // 💡 遅延を少し入れる
 }
 
-// 文字の流れるアニメーション
 function scrollTextAnimation(element, questionData) {
     scrollCount++;
 
@@ -61,6 +57,7 @@ function scrollTextAnimation(element, questionData) {
             scrollTextAnimation(element, questionData);
         }, { once: true });
     } else {
+        // 3回目の後は中央に固定
         element.style.animation = 'none';
         element.style.left = '50%';
         element.style.transform = 'translateX(-50%)';
@@ -71,7 +68,6 @@ function scrollTextAnimation(element, questionData) {
     }
 }
 
-// 都道府県カードの表示
 function showCards(showLabels, questionData) {
     let choicesSet = new Set();
     choicesSet.add(questionData.answer);
@@ -87,22 +83,24 @@ function showCards(showLabels, questionData) {
 
     let cardsHTML = '<div class="grid-container">';
     choices.forEach((pref) => {
+        let imgPath = `../images/${pref.answer}`;  // 画像のパス修正
+        console.log(`🖼 画像のパス: ${imgPath}`); // デバッグログ
+
         cardsHTML += `<div class="grid-item">
                         ${showLabels ? `<div class="pref-label">${pref.name}</div>` : ''}
-                        <img src="./images/${pref.answer}" onclick="checkAnswer('${pref.answer}', '${questionData.answer}')">
+                        <img src="${imgPath}" onclick="checkAnswer('${pref.answer}', '${questionData.answer}')">
                       </div>`;
     });
     cardsHTML += '</div>';
     document.getElementById('cards').innerHTML = cardsHTML;
 }
 
-// 回答チェック
 function checkAnswer(selected, answer) {
     if (selected === answer) {
         points += 10;
         document.getElementById('points').innerText = points;
-        document.getElementById('question').style.animation = 'none';
-        setTimeout(nextQuestion, 500);
+        document.getElementById('question').style.animation = 'none'; // アニメーション停止
+        setTimeout(nextQuestion, 500);  // 次の問題へ
     }
 }
 
